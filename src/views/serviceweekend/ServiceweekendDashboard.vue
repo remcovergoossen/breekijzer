@@ -3,12 +3,9 @@
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
         <div>
-          <h3 class="card-title">Product Sales</h3>
-          <h5 class="card-subtitle font-weight-normal text-muted">
-            Total Earnings of the Month
-          </h5>
+          <h3 class="card-title">Deployment Compliancy</h3>
         </div>
-        <Compliancy></Compliancy>
+        <DeploymentsChart></DeploymentsChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
@@ -152,7 +149,7 @@
 // //////////////////////////////////////////
 // Import Components Here
 // //////////////////////////////////////////
-import Compliancy from '../widgets/chart-widgets/compliancy/Compliancy'
+import DeploymentsChart from '../serviceweekend/DeploymentsChart'
 import WalletBalance from '../widgets/chart-widgets/wallet-balance/WalletBalance'
 import ReferralEarnings from '../widgets/chart-widgets/referral-earnings/ReferralEarnings'
 import EstimatedSales from '../widgets/chart-widgets/estimated-sales/EstimatedSales'
@@ -172,7 +169,7 @@ import DeploymentsTable from '../serviceweekend/DeploymentsTable'
 export default {
   name: 'AnalyticalDashboard',
   components: {
-    Compliancy,
+    DeploymentsChart,
     WalletBalance,
     ReferralEarnings,
     EstimatedSales,

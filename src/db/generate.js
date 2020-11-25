@@ -17,7 +17,7 @@ module.exports = function () {
       return {
         id: n + 1,
         deploymentid: _.random(1, 5),
-        name: faker.name.jobArea(),
+        name: `Device${n + 1}`,
         status: _.sample(['Success', 'InProgress', 'Error', 'Unknown'])
       }
     }),
@@ -25,8 +25,7 @@ module.exports = function () {
       return {
         id: n + 1,
         deploymentid: _.random(1, 5),
-        articleid: n + 200001,
-        status: _.sample(['Success', 'InProgress', 'Error', 'Unknown'])
+        articleid: n + 200001
       }
     })
   }

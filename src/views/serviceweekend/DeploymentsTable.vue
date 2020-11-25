@@ -28,11 +28,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in deployments" :key="item.id">
+              <tr>
                 <td>
                   <div class="d-flex align-items-center">
                     <div class>
-                      <h5 class="m-b-0">{{ item.name }}</h5>
+                      <h5 class="m-b-0">ServerPatching : Server 2008</h5>
                     </div>
                   </div>
                 </td>
@@ -45,6 +45,94 @@
                 <td>
                   <h5 class="m-b-0">
                     <vs-progress :height="12" :percent="5" color="danger"
+                      >success</vs-progress
+                    >
+                  </h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class>
+                      <h5 class="m-b-0">ServerPatching : Server 2008</h5>
+                    </div>
+                  </div>
+                </td>
+                <td>8 December 2020 - 12:00</td>
+                <td>11 December 2020 - 22:00</td>
+                <td>
+                  <label class="label label-danger">4/25</label>
+                </td>
+                <td>2</td>
+                <td>
+                  <h5 class="m-b-0">
+                    <vs-progress :height="12" :percent="5" color="danger"
+                      >success</vs-progress
+                    >
+                  </h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class>
+                      <h5 class="m-b-0">ServerPatching : Server 2012</h5>
+                    </div>
+                  </div>
+                </td>
+                <td>8 December 2020 - 12:00</td>
+                <td>11 December 2020 - 22:00</td>
+                <td>
+                  <label class="label label-danger">4/25</label>
+                </td>
+                <td>2</td>
+                <td>
+                  <h5 class="m-b-0">
+                    <vs-progress :height="12" :percent="54" color="warning"
+                      >success</vs-progress
+                    >
+                  </h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class>
+                      <h5 class="m-b-0">ServerPatching : Server 2016</h5>
+                    </div>
+                  </div>
+                </td>
+                <td>8 December 2020 - 12:00</td>
+                <td>11 December 2020 - 22:00</td>
+                <td>
+                  <label class="label label-danger">4/25</label>
+                </td>
+                <td>2</td>
+                <td>
+                  <h5 class="m-b-0">
+                    <vs-progress :height="12" :percent="5" color="danger"
+                      >success</vs-progress
+                    >
+                  </h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class>
+                      <h5 class="m-b-0">ServerPatching : Server 2019</h5>
+                    </div>
+                  </div>
+                </td>
+                <td>8 December 2020 - 12:00</td>
+                <td>11 December 2020 - 22:00</td>
+                <td>
+                  <label class="label label-danger">4/25</label>
+                </td>
+                <td>2</td>
+                <td>
+                  <h5 class="m-b-0">
+                    <vs-progress :height="12" :percent="90" color="success"
                       >success</vs-progress
                     >
                   </h5>

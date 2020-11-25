@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import CompliancyChart from '../widgets/chart-widgets/compliancy/CompliancyChart'
-import CompliancyTable from '../serviceweekend/CompliancyTable.vue'
+import CompliancyChart from '../serviceweekend/CompliancyChart'
+import CompliancyTable from '../serviceweekend/CompliancyTable'
 
 export default {
   components: {
