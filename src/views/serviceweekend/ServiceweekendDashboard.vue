@@ -12,7 +12,7 @@
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
-      <Deployments></Deployments>
+      <DeploymentsTable></DeploymentsTable>
     </vs-col>
     <!-- /////////////////////////////////////////////
     Wallet Balance
@@ -152,19 +152,19 @@
 // //////////////////////////////////////////
 // Import Components Here
 // //////////////////////////////////////////
-import Compliancy from '../../widgets/chart-widgets/compliancy/Compliancy'
-import WalletBalance from '../../widgets/chart-widgets/wallet-balance/WalletBalance'
-import ReferralEarnings from '../../widgets/chart-widgets/referral-earnings/ReferralEarnings'
-import EstimatedSales from '../../widgets/chart-widgets/estimated-sales/EstimatedSales'
-import RealTimeVisits from '../../widgets/chart-widgets/realtime-visits/RealTimeVisits'
-import ActiveUsers from '../../widgets/chart-widgets/active-users/ActiveUsers'
-import DeviceVisits from '../../widgets/chart-widgets/device-visit/DeviceVisit'
-import RecentComments from '../dashboard-components/recent-comments/RecentComments'
-import RecentChats from '../dashboard-components/recent-chats/RecentChats'
-import CountryVisits from '../dashboard-components/country-visit/CountryVisit'
-import SellingProduct from '../dashboard-components/selling-product/SellingProduct'
+import Compliancy from '../widgets/chart-widgets/compliancy/Compliancy'
+import WalletBalance from '../widgets/chart-widgets/wallet-balance/WalletBalance'
+import ReferralEarnings from '../widgets/chart-widgets/referral-earnings/ReferralEarnings'
+import EstimatedSales from '../widgets/chart-widgets/estimated-sales/EstimatedSales'
+import RealTimeVisits from '../widgets/chart-widgets/realtime-visits/RealTimeVisits'
+import ActiveUsers from '../widgets/chart-widgets/active-users/ActiveUsers'
+import DeviceVisits from '../widgets/chart-widgets/device-visit/DeviceVisit'
+import RecentComments from '../dashboards/dashboard-components/recent-comments/RecentComments'
+import RecentChats from '../dashboards/dashboard-components/recent-chats/RecentChats'
+import CountryVisits from '../dashboards/dashboard-components/country-visit/CountryVisit'
+import SellingProduct from '../dashboards/dashboard-components/selling-product/SellingProduct'
 import App from 'vue-world-map'
-import Deployments from '../../serviceweekend/Deployments.vue'
+import DeploymentsTable from '../serviceweekend/DeploymentsTable'
 
 // //////////////////////////////////////////
 // Export Here
@@ -184,7 +184,7 @@ export default {
     CountryVisits,
     SellingProduct,
     App,
-    Deployments
+    DeploymentsTable
   },
   data: () => ({
     title: 'AnalyticalDashboard',
