@@ -1,5 +1,3 @@
-# my-project
-
 ## Project setup
 ```
 npm install
@@ -15,15 +13,6 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### For API (db.json)
+npx json-server generate.js (from db) folder
