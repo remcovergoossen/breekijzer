@@ -15,4 +15,4 @@ npm run build
 
 
 ### For API (db.json)
-npx json-server generate.js (from db) folder
+npx json-server db.json (from db) folder
