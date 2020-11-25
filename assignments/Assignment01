@@ -1,0 +1,28 @@
+On the url http://localhost:8080/dashboards/serviceweekend-dashboard you can see (under the product sales graph) a Deployments table.
+
+The columns are name/starttime/deadline/success ratio/patches and compliancy %
+
+We have the following API endpoints:
+
+command to start the json-server = npx json-server generate.js (from src\db folder)
+
+  \{^_^}/ hi!
+
+  Loading generate.js
+  Done
+
+  Resources
+  http://localhost:3000/deployments
+  http://localhost:3000/devices
+  http://localhost:3000/patches
+
+  Table should show the following for each deployment:
+
+  name = name
+  starttime = day fullmonthname year + time
+  deadline = day fullmonthname year + time
+  success ratio = X/Y 
+                    where X is the number of Success from Devices from the deployment (see devices endpoint and do a count of Success for that deploymentID )
+                    where Y is the number of total devices for the deployment
+  Patches = number of patches (count of patches in the deployment)
+  Compliancy = % for the success ratio based (so if 100 devices and 25 are 'Success' = 25%)
