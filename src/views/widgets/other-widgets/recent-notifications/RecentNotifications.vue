@@ -10,7 +10,7 @@
         <!-- Message -->
         <a
           href="javascript:void(0)"
-          class="d-flex align-items-center border-bottom d-block px-3 py-2"
+          class="d-flex align-items-center border-bottom d-block px-1 py-1"
         >
           <vs-button
             radius
@@ -19,7 +19,7 @@
             type="filled"
             :icon="notification.btnicon"
           ></vs-button>
-          <div class="mail-contnet d-inline-block w-75 pl-2 align-middle">
+          <div class="mail-contnet d-inline-block w-75 pl-1 align-middle">
             <h6 class="message-title mt-1">
               {{ notification.notificationtitle }}
             </h6>
