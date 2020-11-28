@@ -28,111 +28,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="deployment of deployments" :key="deployment.id">
                 <td>
                   <div class="d-flex align-items-center">
                     <div class>
-                      <h5 class="m-b-0">ServerPatching : Server 2008</h5>
+                      <h5 class="m-b-0">{{deployment.name}}</h5>
                     </div>
                   </div>
                 </td>
-                <td>8 December 2020 - 12:00</td>
-                <td>11 December 2020 - 22:00</td>
+                <td>{{deployment.starttime}}</td>
+                <td>{{deployment.deadline}}</td>
                 <td>
-                  <label class="label label-danger">4/25</label>
+                  <label class="label label-danger">{{deployment.device_success}}/{{deployment.device_total}}</label>
                 </td>
-                <td>2</td>
+                <td>{{deployment.patches}}</td>
                 <td>
                   <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="5" color="danger"
-                      >success</vs-progress
-                    >
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div class>
-                      <h5 class="m-b-0">ServerPatching : Server 2008</h5>
-                    </div>
-                  </div>
-                </td>
-                <td>8 December 2020 - 12:00</td>
-                <td>11 December 2020 - 22:00</td>
-                <td>
-                  <label class="label label-danger">4/25</label>
-                </td>
-                <td>2</td>
-                <td>
-                  <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="5" color="danger"
-                      >success</vs-progress
-                    >
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div class>
-                      <h5 class="m-b-0">ServerPatching : Server 2012</h5>
-                    </div>
-                  </div>
-                </td>
-                <td>8 December 2020 - 12:00</td>
-                <td>11 December 2020 - 22:00</td>
-                <td>
-                  <label class="label label-danger">4/25</label>
-                </td>
-                <td>2</td>
-                <td>
-                  <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="54" color="warning"
-                      >success</vs-progress
-                    >
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div class>
-                      <h5 class="m-b-0">ServerPatching : Server 2016</h5>
-                    </div>
-                  </div>
-                </td>
-                <td>8 December 2020 - 12:00</td>
-                <td>11 December 2020 - 22:00</td>
-                <td>
-                  <label class="label label-danger">4/25</label>
-                </td>
-                <td>2</td>
-                <td>
-                  <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="5" color="danger"
-                      >success</vs-progress
-                    >
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div class>
-                      <h5 class="m-b-0">ServerPatching : Server 2019</h5>
-                    </div>
-                  </div>
-                </td>
-                <td>8 December 2020 - 12:00</td>
-                <td>11 December 2020 - 22:00</td>
-                <td>
-                  <label class="label label-danger">4/25</label>
-                </td>
-                <td>2</td>
-                <td>
-                  <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="90" color="success"
+                    <vs-progress :height="12" :percent="deployment.compliancy" color="danger"
                       >success</vs-progress
                     >
                   </h5>
@@ -151,6 +63,8 @@
 </template>
 
 <script>
+// import axios from 'axios';
+
 export default {
   name: 'basictable',
   data: () => ({
@@ -160,78 +74,78 @@ export default {
     title: 'BasicTable',
     basictable: false,
     defaulttable: false,
-    users: [
-      {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        website: 'hildegard.org'
-      },
-      {
-        id: 2,
-        name: 'Ervin Howell',
-        username: 'Antonette',
-        email: 'Shanna@melissa.tv',
-        website: 'anastasia.net'
-      },
-      {
-        id: 3,
-        name: 'Clementine Bauch',
-        username: 'Samantha',
-        email: 'Nathan@yesenia.net',
-        website: 'ramiro.info'
-      },
-      {
-        id: 4,
-        name: 'Patricia Lebsack',
-        username: 'Karianne',
-        email: 'Julianne.OConner@kory.org',
-        website: 'kale.biz'
-      },
-      {
-        id: 5,
-        name: 'Chelsey Dietrich',
-        username: 'Kamren',
-        email: 'Lucio_Hettinger@annie.ca',
-        website: 'demarco.info'
-      },
-      {
-        id: 6,
-        name: 'Mrs. Dennis Schulist',
-        username: 'Leopoldo_Corkery',
-        email: 'Karley_Dach@jasper.info',
-        website: 'ola.org'
-      },
-      {
-        id: 7,
-        name: 'Kurtis Weissnat',
-        username: 'Elwyn.Skiles',
-        email: 'Telly.Hoeger@billy.biz',
-        website: 'elvis.io'
-      },
-      {
-        id: 8,
-        name: 'Nicholas Runolfsdottir V',
-        username: 'Maxime_Nienow',
-        email: 'Sherwood@rosamond.me',
-        website: 'jacynthe.com'
-      },
-      {
-        id: 9,
-        name: 'Glenna Reichert',
-        username: 'Delphine',
-        email: 'Chaim_McDermott@dana.io',
-        website: 'conrad.com'
-      },
-      {
-        id: 10,
-        name: 'Clementina DuBuque',
-        username: 'Moriah.Stanton',
-        email: 'Rey.Padberg@karina.biz',
-        website: 'ambrose.net'
-      }
-    ],
+    // users: [
+    //   {
+    //     id: 1,
+    //     name: 'Leanne Graham',
+    //     username: 'Bret',
+    //     email: 'Sincere@april.biz',
+    //     website: 'hildegard.org'
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Ervin Howell',
+    //     username: 'Antonette',
+    //     email: 'Shanna@melissa.tv',
+    //     website: 'anastasia.net'
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'Clementine Bauch',
+    //     username: 'Samantha',
+    //     email: 'Nathan@yesenia.net',
+    //     website: 'ramiro.info'
+    //   },
+    //   {
+    //     id: 4,
+    //     name: 'Patricia Lebsack',
+    //     username: 'Karianne',
+    //     email: 'Julianne.OConner@kory.org',
+    //     website: 'kale.biz'
+    //   },
+    //   {
+    //     id: 5,
+    //     name: 'Chelsey Dietrich',
+    //     username: 'Kamren',
+    //     email: 'Lucio_Hettinger@annie.ca',
+    //     website: 'demarco.info'
+    //   },
+    //   {
+    //     id: 6,
+    //     name: 'Mrs. Dennis Schulist',
+    //     username: 'Leopoldo_Corkery',
+    //     email: 'Karley_Dach@jasper.info',
+    //     website: 'ola.org'
+    //   },
+    //   {
+    //     id: 7,
+    //     name: 'Kurtis Weissnat',
+    //     username: 'Elwyn.Skiles',
+    //     email: 'Telly.Hoeger@billy.biz',
+    //     website: 'elvis.io'
+    //   },
+    //   {
+    //     id: 8,
+    //     name: 'Nicholas Runolfsdottir V',
+    //     username: 'Maxime_Nienow',
+    //     email: 'Sherwood@rosamond.me',
+    //     website: 'jacynthe.com'
+    //   },
+    //   {
+    //     id: 9,
+    //     name: 'Glenna Reichert',
+    //     username: 'Delphine',
+    //     email: 'Chaim_McDermott@dana.io',
+    //     website: 'conrad.com'
+    //   },
+    //   {
+    //     id: 10,
+    //     name: 'Clementina DuBuque',
+    //     username: 'Moriah.Stanton',
+    //     email: 'Rey.Padberg@karina.biz',
+    //     website: 'ambrose.net'
+    //   }
+    // ],
     stripedtable: false,
     statetable: false
   }),
@@ -241,29 +155,56 @@ export default {
         return response.json()
       })
       .then((data) => {
-        //this.deployments = data
-
+        console.log('deployments', data)//deployment data goes here...
+        this.cnt_loop1 = 0
+        this.cnt_loop2 = 0
         for (let prop in data) {
+          this.deployments.push({
+            id: data[prop].id,
+            name: data[prop].name,
+            starttime: data[prop].starttime,
+            deadline: data[prop].deadline,
+            device_total:0,
+            device_success:0,
+            patches:0,
+            compliancy:0
+          })
           fetch(
             'http://localhost:3000/devices/?' +
               new URLSearchParams({
-                deploymentid: prop
+                deploymentid: data[prop].id
               })
           )
             .then((response) => response.json())
-            .then((data) => {
-              this.devices = data
-
+            .then((data) => {//data for devices
+              this.deployments[this.cnt_loop1].device_total = data.length
+              var device_success = 0;
+              for(let prop in data){
+                if(data[prop].status == "Success")
+                  this.deployments[this.cnt_loop1].device_success = this.deployments[this.cnt_loop1].device_success + 1
+              }
+              this.deployments[this.cnt_loop1].compliancy = Math.floor(this.deployments[this.cnt_loop1].device_success * 100 / this.deployments[this.cnt_loop1].device_total)
+                console.log('cnt_loop1', this.cnt_loop1)
+              fetch(
+                'http://localhost:3000/patches/?' +
+                new URLSearchParams({
+                  deploymentid: this.deployments[this.cnt_loop1].id
+                })
+              )
+              .then((response) => response.json())
+              .then((data) => {//data for patches
+                console.log('cnt_loop2', this.cnt_loop2)
+                console.log('patches',data)
+                this.deployments[this.cnt_loop2].patches = data.length
+                this.cnt_loop2++
+              })
+              this.cnt_loop1++;
+              
+              
               //console.log(`Amount of devices = ${this.devices.length}`)
 
-              this.deployments.push({
-                id: prop,
-                ratio: this.devices.length,
-                name: prop[0].name,
-                starttime: prop.starttime,
-                deadline: prop.deadline
-              })
-              console.log(this.deployments)
+
+              // console.log(this.deployments)
             })
         }
       })
