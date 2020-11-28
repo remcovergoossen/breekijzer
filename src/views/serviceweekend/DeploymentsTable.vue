@@ -64,7 +64,52 @@
 
 <script>
 // import axios from 'axios';
-
+function getFullMonthName(numerical_month)
+{
+  var str_month = ''
+  numerical_month = Number(numerical_month);
+  switch(numerical_month) {
+  case 1:
+    str_month = 'January'
+    break;
+  case 2:
+    str_month = 'February'
+    break;
+  case 3:
+    str_month = 'March'
+    break;
+  case 4:
+    str_month = 'April'
+    break;
+  case 5:
+    str_month = 'May'
+    break;
+  case 6:
+    str_month = 'June'
+    break;
+  case 7:
+    str_month = 'July'
+    break;
+  case 8:
+    str_month = 'August'
+    break;
+  case 9:
+    str_month = 'September'
+    break;
+  case 10:
+    str_month = 'October'
+    break;
+  case 11:
+    str_month = 'November'
+    break;
+  case 12:
+    str_month = 'December'
+    break;
+  default:
+    str_month = "invalid month format"
+  }
+  return str_month;
+}
 export default {
   name: 'basictable',
   data: () => ({
@@ -74,78 +119,7 @@ export default {
     title: 'BasicTable',
     basictable: false,
     defaulttable: false,
-    // users: [
-    //   {
-    //     id: 1,
-    //     name: 'Leanne Graham',
-    //     username: 'Bret',
-    //     email: 'Sincere@april.biz',
-    //     website: 'hildegard.org'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Ervin Howell',
-    //     username: 'Antonette',
-    //     email: 'Shanna@melissa.tv',
-    //     website: 'anastasia.net'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Clementine Bauch',
-    //     username: 'Samantha',
-    //     email: 'Nathan@yesenia.net',
-    //     website: 'ramiro.info'
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Patricia Lebsack',
-    //     username: 'Karianne',
-    //     email: 'Julianne.OConner@kory.org',
-    //     website: 'kale.biz'
-    //   },
-    //   {
-    //     id: 5,
-    //     name: 'Chelsey Dietrich',
-    //     username: 'Kamren',
-    //     email: 'Lucio_Hettinger@annie.ca',
-    //     website: 'demarco.info'
-    //   },
-    //   {
-    //     id: 6,
-    //     name: 'Mrs. Dennis Schulist',
-    //     username: 'Leopoldo_Corkery',
-    //     email: 'Karley_Dach@jasper.info',
-    //     website: 'ola.org'
-    //   },
-    //   {
-    //     id: 7,
-    //     name: 'Kurtis Weissnat',
-    //     username: 'Elwyn.Skiles',
-    //     email: 'Telly.Hoeger@billy.biz',
-    //     website: 'elvis.io'
-    //   },
-    //   {
-    //     id: 8,
-    //     name: 'Nicholas Runolfsdottir V',
-    //     username: 'Maxime_Nienow',
-    //     email: 'Sherwood@rosamond.me',
-    //     website: 'jacynthe.com'
-    //   },
-    //   {
-    //     id: 9,
-    //     name: 'Glenna Reichert',
-    //     username: 'Delphine',
-    //     email: 'Chaim_McDermott@dana.io',
-    //     website: 'conrad.com'
-    //   },
-    //   {
-    //     id: 10,
-    //     name: 'Clementina DuBuque',
-    //     username: 'Moriah.Stanton',
-    //     email: 'Rey.Padberg@karina.biz',
-    //     website: 'ambrose.net'
-    //   }
-    // ],
+
     stripedtable: false,
     statetable: false
   }),
@@ -162,8 +136,8 @@ export default {
           this.deployments.push({
             id: data[prop].id,
             name: data[prop].name,
-            starttime: data[prop].starttime,
-            deadline: data[prop].deadline,
+            starttime: data[prop].starttime.substring(8, 10) + ' ' + getFullMonthName(data[prop].starttime.substring(5, 7)) + ' ' + data[prop].starttime.substring(0, 4) + ' ' + data[prop].starttime.substring(11, 19),
+            deadline: data[prop].deadline.substring(8, 10) + ' ' + getFullMonthName(data[prop].deadline.substring(5, 7)) + ' ' + data[prop].deadline.substring(0, 4) + ' ' + data[prop].deadline.substring(11, 19),
             device_total:0,
             device_success:0,
             patches:0,
