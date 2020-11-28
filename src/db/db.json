@@ -1,171 +1,62 @@
 {
-  "deployments": [
-    {
-      "id": 1,
-      "name": "ServerPatching : Server 2008",
-      "starttime": "2021-08-27T05:12:48.551Z",
-      "deadline": "2020-12-20T18:26:06.809Z"
-    },
-    {
-      "id": 2,
-      "name": "ServerPatching : Server 2012",
-      "starttime": "2021-06-30T15:15:44.153Z",
-      "deadline": "2021-01-20T16:14:12.886Z"
-    },
-    {
-      "id": 3,
-      "name": "ServerPatching : Server 2016",
-      "starttime": "2020-12-27T04:22:08.874Z",
-      "deadline": "2021-01-11T10:16:12.053Z"
-    },
-    {
-      "id": 4,
-      "name": "ServerPatching : Server 2019",
-      "starttime": "2020-12-03T21:41:16.668Z",
-      "deadline": "2020-12-15T13:50:24.905Z"
-    },
-    {
-      "id": 5,
-      "name": "ServerPatching : Pre-SW",
-      "starttime": "2021-01-07T17:50:12.756Z",
-      "deadline": "2020-12-28T09:38:22.047Z"
-    }
-  ],
-  "patches": [
-    {
-      "id": 1,
-      "deploymentid": 5,
-      "articleid": 200001
-    },
-    {
-      "id": 2,
-      "deploymentid": 2,
-      "articleid": 200002
-    },
-    {
-      "id": 3,
-      "deploymentid": 3,
-      "articleid": 200003
-    },
-    {
-      "id": 4,
-      "deploymentid": 3,
-      "articleid": 200004
-    },
-    {
-      "id": 5,
-      "deploymentid": 2,
-      "articleid": 200005
-    },
-    {
-      "id": 6,
-      "deploymentid": 3,
-      "articleid": 200006
-    },
-    {
-      "id": 7,
-      "deploymentid": 1,
-      "articleid": 200007
-    },
-    {
-      "id": 8,
-      "deploymentid": 5,
-      "articleid": 200008
-    },
-    {
-      "id": 9,
-      "deploymentid": 4,
-      "articleid": 200009
-    },
-    {
-      "id": 10,
-      "deploymentid": 1,
-      "articleid": 200010
-    },
-    {
-      "id": 11,
-      "deploymentid": 5,
-      "articleid": 200011
-    },
-    {
-      "id": 12,
-      "deploymentid": 1,
-      "articleid": 200012
-    },
-    {
-      "id": 13,
-      "deploymentid": 4,
-      "articleid": 200013
-    },
-    {
-      "id": 14,
-      "deploymentid": 1,
-      "articleid": 200014
-    },
-    {
-      "id": 15,
-      "deploymentid": 4,
-      "articleid": 200015
-    }
-  ],
   "devices": [
     {
       "id": 1,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device1",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 2,
-      "deploymentid": 2,
+      "deploymentid": 5,
       "name": "Device2",
-      "status": "Unknown"
+      "status": "Error"
     },
     {
       "id": 3,
-      "deploymentid": 5,
+      "deploymentid": 3,
       "name": "Device3",
-      "status": "Unknown"
+      "status": "Error"
     },
     {
       "id": 4,
-      "deploymentid": 2,
+      "deploymentid": 4,
       "name": "Device4",
-      "status": "Unknown"
+      "status": "Error"
     },
     {
       "id": 5,
-      "deploymentid": 3,
+      "deploymentid": 5,
       "name": "Device5",
-      "status": "Success"
+      "status": "Unknown"
     },
     {
       "id": 6,
-      "deploymentid": 1,
+      "deploymentid": 3,
       "name": "Device6",
       "status": "Success"
     },
     {
       "id": 7,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device7",
-      "status": "Success"
+      "status": "InProgress"
     },
     {
       "id": 8,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device8",
-      "status": "Error"
-    },
-    {
-      "id": 9,
-      "deploymentid": 3,
-      "name": "Device9",
       "status": "Success"
     },
     {
+      "id": 9,
+      "deploymentid": 5,
+      "name": "Device9",
+      "status": "Error"
+    },
+    {
       "id": 10,
-      "deploymentid": 1,
+      "deploymentid": 3,
       "name": "Device10",
       "status": "Error"
     },
@@ -173,157 +64,157 @@
       "id": 11,
       "deploymentid": 1,
       "name": "Device11",
-      "status": "InProgress"
-    },
-    {
-      "id": 12,
-      "deploymentid": 4,
-      "name": "Device12",
       "status": "Success"
     },
     {
+      "id": 12,
+      "deploymentid": 5,
+      "name": "Device12",
+      "status": "InProgress"
+    },
+    {
       "id": 13,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device13",
       "status": "Unknown"
     },
     {
       "id": 14,
-      "deploymentid": 5,
+      "deploymentid": 2,
       "name": "Device14",
-      "status": "InProgress"
-    },
-    {
-      "id": 15,
-      "deploymentid": 5,
-      "name": "Device15",
       "status": "Error"
     },
     {
+      "id": 15,
+      "deploymentid": 2,
+      "name": "Device15",
+      "status": "InProgress"
+    },
+    {
       "id": 16,
-      "deploymentid": 5,
+      "deploymentid": 4,
       "name": "Device16",
       "status": "Success"
     },
     {
       "id": 17,
-      "deploymentid": 4,
+      "deploymentid": 1,
       "name": "Device17",
-      "status": "Error"
+      "status": "InProgress"
     },
     {
       "id": 18,
-      "deploymentid": 2,
+      "deploymentid": 1,
       "name": "Device18",
-      "status": "Unknown"
-    },
-    {
-      "id": 19,
-      "deploymentid": 2,
-      "name": "Device19",
-      "status": "Success"
-    },
-    {
-      "id": 20,
-      "deploymentid": 3,
-      "name": "Device20",
       "status": "Error"
     },
     {
-      "id": 21,
+      "id": 19,
+      "deploymentid": 1,
+      "name": "Device19",
+      "status": "Error"
+    },
+    {
+      "id": 20,
       "deploymentid": 4,
+      "name": "Device20",
+      "status": "Unknown"
+    },
+    {
+      "id": 21,
+      "deploymentid": 3,
       "name": "Device21",
       "status": "InProgress"
     },
     {
       "id": 22,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device22",
-      "status": "Success"
+      "status": "Unknown"
     },
     {
       "id": 23,
       "deploymentid": 5,
       "name": "Device23",
-      "status": "InProgress"
+      "status": "Error"
     },
     {
       "id": 24,
-      "deploymentid": 5,
+      "deploymentid": 3,
       "name": "Device24",
-      "status": "InProgress"
+      "status": "Success"
     },
     {
       "id": 25,
       "deploymentid": 3,
       "name": "Device25",
-      "status": "InProgress"
+      "status": "Error"
     },
     {
       "id": 26,
-      "deploymentid": 2,
+      "deploymentid": 3,
       "name": "Device26",
       "status": "Success"
     },
     {
       "id": 27,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device27",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 28,
-      "deploymentid": 2,
+      "deploymentid": 5,
       "name": "Device28",
-      "status": "InProgress"
+      "status": "Error"
     },
     {
       "id": 29,
-      "deploymentid": 2,
+      "deploymentid": 4,
       "name": "Device29",
-      "status": "InProgress"
-    },
-    {
-      "id": 30,
-      "deploymentid": 5,
-      "name": "Device30",
       "status": "Success"
     },
     {
+      "id": 30,
+      "deploymentid": 3,
+      "name": "Device30",
+      "status": "InProgress"
+    },
+    {
       "id": 31,
-      "deploymentid": 5,
+      "deploymentid": 3,
       "name": "Device31",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 32,
-      "deploymentid": 1,
+      "deploymentid": 5,
       "name": "Device32",
       "status": "Error"
     },
     {
       "id": 33,
-      "deploymentid": 5,
+      "deploymentid": 4,
       "name": "Device33",
-      "status": "Error"
+      "status": "Success"
     },
     {
       "id": 34,
-      "deploymentid": 3,
+      "deploymentid": 5,
       "name": "Device34",
-      "status": "Unknown"
-    },
-    {
-      "id": 35,
-      "deploymentid": 4,
-      "name": "Device35",
       "status": "InProgress"
     },
     {
+      "id": 35,
+      "deploymentid": 1,
+      "name": "Device35",
+      "status": "Unknown"
+    },
+    {
       "id": 36,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device36",
-      "status": "Error"
+      "status": "InProgress"
     },
     {
       "id": 37,
@@ -333,117 +224,117 @@
     },
     {
       "id": 38,
-      "deploymentid": 2,
+      "deploymentid": 5,
       "name": "Device38",
-      "status": "Error"
+      "status": "Unknown"
     },
     {
       "id": 39,
       "deploymentid": 5,
       "name": "Device39",
-      "status": "Success"
+      "status": "Error"
     },
     {
       "id": 40,
       "deploymentid": 5,
       "name": "Device40",
-      "status": "InProgress"
+      "status": "Success"
     },
     {
       "id": 41,
-      "deploymentid": 4,
+      "deploymentid": 5,
       "name": "Device41",
-      "status": "InProgress"
+      "status": "Success"
     },
     {
       "id": 42,
-      "deploymentid": 5,
+      "deploymentid": 4,
       "name": "Device42",
-      "status": "Error"
+      "status": "Unknown"
     },
     {
       "id": 43,
-      "deploymentid": 4,
+      "deploymentid": 2,
       "name": "Device43",
-      "status": "InProgress"
+      "status": "Success"
     },
     {
       "id": 44,
-      "deploymentid": 2,
+      "deploymentid": 1,
       "name": "Device44",
       "status": "Unknown"
     },
     {
       "id": 45,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device45",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 46,
-      "deploymentid": 2,
+      "deploymentid": 1,
       "name": "Device46",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 47,
-      "deploymentid": 5,
+      "deploymentid": 3,
       "name": "Device47",
-      "status": "Success"
+      "status": "Error"
     },
     {
       "id": 48,
-      "deploymentid": 4,
+      "deploymentid": 2,
       "name": "Device48",
-      "status": "Error"
+      "status": "Unknown"
     },
     {
       "id": 49,
       "deploymentid": 4,
       "name": "Device49",
-      "status": "Error"
+      "status": "InProgress"
     },
     {
       "id": 50,
-      "deploymentid": 4,
+      "deploymentid": 3,
       "name": "Device50",
       "status": "Error"
     },
     {
       "id": 51,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device51",
       "status": "Unknown"
     },
     {
       "id": 52,
-      "deploymentid": 4,
+      "deploymentid": 3,
       "name": "Device52",
-      "status": "Success"
+      "status": "Unknown"
     },
     {
       "id": 53,
-      "deploymentid": 3,
+      "deploymentid": 1,
       "name": "Device53",
       "status": "Success"
     },
     {
       "id": 54,
-      "deploymentid": 5,
+      "deploymentid": 4,
       "name": "Device54",
-      "status": "Error"
+      "status": "InProgress"
     },
     {
       "id": 55,
-      "deploymentid": 2,
+      "deploymentid": 4,
       "name": "Device55",
-      "status": "Success"
+      "status": "InProgress"
     },
     {
       "id": 56,
-      "deploymentid": 2,
+      "deploymentid": 5,
       "name": "Device56",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 57,
@@ -455,107 +346,107 @@
       "id": 58,
       "deploymentid": 2,
       "name": "Device58",
-      "status": "InProgress"
+      "status": "Unknown"
     },
     {
       "id": 59,
-      "deploymentid": 3,
+      "deploymentid": 2,
       "name": "Device59",
       "status": "Unknown"
     },
     {
       "id": 60,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device60",
       "status": "Unknown"
     },
     {
       "id": 61,
-      "deploymentid": 2,
+      "deploymentid": 4,
       "name": "Device61",
-      "status": "Success"
+      "status": "InProgress"
     },
     {
       "id": 62,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device62",
-      "status": "InProgress"
+      "status": "Unknown"
     },
     {
       "id": 63,
       "deploymentid": 5,
       "name": "Device63",
-      "status": "InProgress"
+      "status": "Success"
     },
     {
       "id": 64,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device64",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 65,
-      "deploymentid": 5,
+      "deploymentid": 3,
       "name": "Device65",
-      "status": "Unknown"
+      "status": "InProgress"
     },
     {
       "id": 66,
-      "deploymentid": 3,
+      "deploymentid": 4,
       "name": "Device66",
-      "status": "InProgress"
-    },
-    {
-      "id": 67,
-      "deploymentid": 1,
-      "name": "Device67",
       "status": "Error"
     },
     {
+      "id": 67,
+      "deploymentid": 5,
+      "name": "Device67",
+      "status": "Unknown"
+    },
+    {
       "id": 68,
-      "deploymentid": 1,
+      "deploymentid": 4,
       "name": "Device68",
-      "status": "InProgress"
+      "status": "Error"
     },
     {
       "id": 69,
-      "deploymentid": 4,
+      "deploymentid": 5,
       "name": "Device69",
       "status": "Error"
     },
     {
       "id": 70,
-      "deploymentid": 5,
+      "deploymentid": 2,
       "name": "Device70",
       "status": "InProgress"
     },
     {
       "id": 71,
-      "deploymentid": 2,
+      "deploymentid": 4,
       "name": "Device71",
-      "status": "Success"
+      "status": "Error"
     },
     {
       "id": 72,
-      "deploymentid": 1,
+      "deploymentid": 5,
       "name": "Device72",
-      "status": "Unknown"
+      "status": "Success"
     },
     {
       "id": 73,
-      "deploymentid": 3,
+      "deploymentid": 1,
       "name": "Device73",
       "status": "Error"
     },
     {
       "id": 74,
-      "deploymentid": 2,
+      "deploymentid": 5,
       "name": "Device74",
       "status": "Error"
     },
     {
       "id": 75,
-      "deploymentid": 3,
+      "deploymentid": 2,
       "name": "Device75",
       "status": "Success"
     }

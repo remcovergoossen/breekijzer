@@ -32,19 +32,26 @@
                 <td>
                   <div class="d-flex align-items-center">
                     <div class>
-                      <h5 class="m-b-0">{{deployment.name}}</h5>
+                      <h5 class="m-b-0">{{ deployment.name }}</h5>
                     </div>
                   </div>
                 </td>
-                <td>{{deployment.starttime}}</td>
-                <td>{{deployment.deadline}}</td>
+                <td>{{ deployment.starttime }}</td>
+                <td>{{ deployment.deadline }}</td>
                 <td>
-                  <label class="label label-danger">{{deployment.device_success}}/{{deployment.device_total}}</label>
+                  <label class="label label-danger"
+                    >{{ deployment.device_success }}/{{
+                      deployment.device_total
+                    }}</label
+                  >
                 </td>
-                <td>{{deployment.patches}}</td>
+                <td>{{ deployment.patches }}</td>
                 <td>
                   <h5 class="m-b-0">
-                    <vs-progress :height="12" :percent="deployment.compliancy" color="danger"
+                    <vs-progress
+                      :height="12"
+                      :percent="deployment.compliancy"
+                      color="danger"
                       >success</vs-progress
                     >
                   </h5>
@@ -155,7 +162,7 @@ export default {
         return response.json()
       })
       .then((data) => {
-        console.log('deployments', data)//deployment data goes here...
+        console.log('deployments', data) //deployment data goes here...
         this.cnt_loop1 = 0
         this.cnt_loop2 = 0
         for (let prop in data) {
@@ -164,10 +171,10 @@ export default {
             name: data[prop].name,
             starttime: data[prop].starttime,
             deadline: data[prop].deadline,
-            device_total:0,
-            device_success:0,
-            patches:0,
-            compliancy:0
+            device_total: 0,
+            device_success: 0,
+            patches: 0,
+            compliancy: 0
           })
           fetch(
             'http://localhost:3000/devices/?' +
@@ -176,33 +183,37 @@ export default {
               })
           )
             .then((response) => response.json())
-            .then((data) => {//data for devices
+            .then((data) => {
+              //data for devices
               this.deployments[this.cnt_loop1].device_total = data.length
-              var device_success = 0;
-              for(let prop in data){
-                if(data[prop].status == "Success")
-                  this.deployments[this.cnt_loop1].device_success = this.deployments[this.cnt_loop1].device_success + 1
+              var device_success = 0
+              for (let prop in data) {
+                if (data[prop].status == 'Success')
+                  this.deployments[this.cnt_loop1].device_success =
+                    this.deployments[this.cnt_loop1].device_success + 1
               }
-              this.deployments[this.cnt_loop1].compliancy = Math.floor(this.deployments[this.cnt_loop1].device_success * 100 / this.deployments[this.cnt_loop1].device_total)
-                console.log('cnt_loop1', this.cnt_loop1)
+              this.deployments[this.cnt_loop1].compliancy = Math.floor(
+                (this.deployments[this.cnt_loop1].device_success * 100) /
+                  this.deployments[this.cnt_loop1].device_total
+              )
+              console.log('cnt_loop1', this.cnt_loop1)
               fetch(
                 'http://localhost:3000/patches/?' +
-                new URLSearchParams({
-                  deploymentid: this.deployments[this.cnt_loop1].id
-                })
+                  new URLSearchParams({
+                    deploymentid: this.deployments[this.cnt_loop1].id
+                  })
               )
-              .then((response) => response.json())
-              .then((data) => {//data for patches
-                console.log('cnt_loop2', this.cnt_loop2)
-                console.log('patches',data)
-                this.deployments[this.cnt_loop2].patches = data.length
-                this.cnt_loop2++
-              })
-              this.cnt_loop1++;
-              
-              
-              //console.log(`Amount of devices = ${this.devices.length}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  //data for patches
+                  console.log('cnt_loop2', this.cnt_loop2)
+                  console.log('patches', data)
+                  this.deployments[this.cnt_loop2].patches = data.length
+                  this.cnt_loop2++
+                })
+              this.cnt_loop1++
 
+              //console.log(`Amount of devices = ${this.devices.length}`)
 
               // console.log(this.deployments)
             })
