@@ -96,7 +96,6 @@ export default {
         return response.json()
       })
       .then((data) => {
-        console.log('deployments', data) //deployment data goes here...
         this.cnt_loop1 = 0
         this.cnt_loop2 = 0
         for (let prop in data) {
@@ -143,7 +142,6 @@ export default {
                 (this.deployments[this.cnt_loop1].device_success * 100) /
                   this.deployments[this.cnt_loop1].device_total
               )
-              console.log('cnt_loop1', this.cnt_loop1)
               fetch(
                 'http://localhost:3000/patches/?' +
                   new URLSearchParams({
@@ -153,16 +151,10 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                   //data for patches
-                  console.log('cnt_loop2', this.cnt_loop2)
-                  console.log('patches', data)
                   this.deployments[this.cnt_loop2].patches = data.length
                   this.cnt_loop2++
                 })
               this.cnt_loop1++
-
-              //console.log(`Amount of devices = ${this.devices.length}`)
-
-              // console.log(this.deployments)
             })
         }
       })

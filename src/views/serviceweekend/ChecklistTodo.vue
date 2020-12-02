@@ -28,6 +28,9 @@
             :list="todos"
             group="custom"
             class="cursor-move todo-cards"
+            id="todos"
+            @start="dragstart"
+            @end="dragend"
           >
             <vs-card
               class="shadow-none"
@@ -66,7 +69,10 @@
           <draggable
             :list="progresstodo"
             group="custom"
+            id="inprogress"
             class="cursor-move progress-cards"
+            @start="dragstart"
+            @end="dragend"
           >
             <vs-card
               class="shadow-none"
@@ -100,8 +106,11 @@
           <h4 class="card-title">COMPLETED</h4>
           <draggable
             :list="completetodo"
+            id="completed"
             group="custom"
             class="cursor-move completed-cards"
+            @start="dragstart"
+            @end="dragend"
           >
             <vs-card
               class="shadow-none"
@@ -138,6 +147,9 @@
             :list="onholdtodo"
             group="custom"
             class="cursor-move hold-cards"
+            id="onhold"
+            @start="dragstart"
+            @end="dragend"
           >
             <vs-card
               class="shadow-none"
@@ -244,53 +256,45 @@ export default {
     isActive: false,
     badgeactive: [],
     search: '',
-    todos: [
-      {
-        todotitle: 'Exchange / SFB',
-        todosubtitle: '',
-        badgeactive: true
-      },
-      {
-        todotitle: 'Topdesk URL Checks',
-        todosubtitle: '',
-        badgeactive: true
-      },
-      {
-        todotitle: 'Phoenix Controle ',
-        todosubtitle: 'Run scheduled task phoenix controle op S0MBEH0019G',
-        badgeactive: true
-      },
-      {
-        todotitle: 'URL Intern',
-        todosubtitle:
-          'Commodo luctus, nisi erat porttitor. Integer posuere erat a ante venenatis.',
-        badgeactive: true
-      },
-      {
-        todotitle: 'URL Extern',
-        todosubtitle: '',
-        badgeactive: true
-      },
-      {
-        todotitle: 'Documentum',
-        todosubtitle: '',
-        badgeactive: true
-      },
-      {
-        todotitle: 'Webpages',
-        todosubtitle: '',
-        badgeactive: true
-      },
-      {
-        todotitle: 'Brokers',
-        todosubtitle: '',
-        badgeactive: true
-      }
-    ],
+    todos: [],
     progresstodo: [],
     completetodo: [],
     onholdtodo: []
   }),
+  created(){
+    fetch('http://localhost:3000/checklisttodo/?' +
+              new URLSearchParams({
+                state: 'todo'
+              }))
+      .then((response) => response.json())
+      .then((data) => {
+        this.todos = data
+      })
+    fetch('http://localhost:3000/checklisttodo/?' +
+              new URLSearchParams({
+                state: 'inprogress'
+              }))
+      .then((response) => response.json())
+      .then((data) => {
+        this.progresstodo = data
+      })
+    fetch('http://localhost:3000/checklisttodo/?' +
+              new URLSearchParams({
+                state: 'onhold'
+              }))
+      .then((response) => response.json())
+      .then((data) => {
+        this.onholdtodo = data
+      })
+    fetch('http://localhost:3000/checklisttodo/?' +
+              new URLSearchParams({
+                state: 'completed'
+              }))
+      .then((response) => response.json())
+      .then((data) => {
+        this.completetodo = data
+      })
+  },
   components: {
     draggable
   },
@@ -299,9 +303,11 @@ export default {
       const todo_bunch = {
         todotitle: this.todotitle,
         todosubtitle: this.todosubtitle,
-        badgeactive: this.badgeactive
+        badgeactive: this.badgeactive,
+        state: 'todo'
       }
       this.todos.unshift(todo_bunch)
+      this.createCheckList(todo_bunch)
 
       this.todotitle = ''
       this.todosubtitle = ''
@@ -317,12 +323,68 @@ export default {
         badgeactive: false
       }
       this.todos.unshift(todo_bunch)
-
       this.todotitle = ''
       this.todosubtitle = ''
       this.badgeactive = ''
       // To prevent the form from submitting
       e.preventDefault()
+    },
+
+    async createCheckList(todo_bunch) {
+      console.log('called createCheckList')
+      const requestOptions  = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(todo_bunch)
+      };
+
+      fetch("http://localhost:3000/checklisttodo", requestOptions)
+          .then(response => response.json())
+          .then(data => (console.log("created checklist", data)));
+    },
+    async updateCheckList(todo_bunch, state){
+      const todo_data = {
+        todotitle:todo_bunch.todotitle,
+        state:state,
+        todosubtitle:todo_bunch.todosubtitle,
+        badgeactive:todo_bunch.badgeactive
+      };
+      const requestOptions  = {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(todo_data)
+      };
+
+      fetch("http://localhost:3000/checklisttodo/" + todo_bunch.id, requestOptions)
+          .then(response => response.json())
+          //.then(data => (
+            //console.log("updated checklist", data)
+          //  )
+          //);
+    },
+
+    dragstart(e, item){
+    },
+    dragend(e, item){
+      console.log(this.todos.length + ' ' + this.onholdtodo.length + '  ' + this.completetodo.length + ' ' + this.progresstodo.length)
+      
+      console.log('todos', this.todos)
+      console.log('onholdtodo', this.onholdtodo)
+      console.log('completetodo', this.completetodo)
+      console.log('progresstodo', this.progresstodo)
+
+      for (let prop in this.todos) {
+        this.updateCheckList(this.todos[prop], 'todo')
+      }
+      for (let prop in this.onholdtodo) {
+        this.updateCheckList(this.onholdtodo[prop], 'onhold')
+      }
+      for (let prop in this.completetodo) {
+        this.updateCheckList(this.completetodo[prop], 'completed')
+      }
+      for (let prop in this.progresstodo) {
+        this.updateCheckList(this.progresstodo[prop], 'inprogress')
+      }
     }
   }
 }
