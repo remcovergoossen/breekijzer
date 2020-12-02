@@ -2,9 +2,7 @@
   <div>
     <vs-card>
       <div class="d-md-flex align-items-center pb-2">
-        <h3 class="card-title mb-0">
-          Add your task and change the status from below
-        </h3>
+        <h3 class="card-title mb-0">Manual Checks</h3>
         <div class="ml-auto">
           <vs-button
             @click="active = !active"
@@ -12,7 +10,7 @@
             type="filled"
             class="mt-4 mt-md-0"
           >
-            <i class="mdi mdi-border-color mr-1"></i> Add Todo
+            <i class="mdi mdi-border-color mr-1"></i> Add Check
           </vs-button>
         </div>
       </div>

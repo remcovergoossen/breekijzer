@@ -18,7 +18,13 @@ module.exports = function () {
         id: n + 1,
         deploymentid: _.random(1, 5),
         name: `Device${n + 1}`,
-        status: _.sample(['Success', 'InProgress', 'Error', 'Unknown'])
+        sccmstate: _.sample(['Success', 'InProgress', 'Error', 'Unknown']),
+        localstate: _.sample([
+          'Installing',
+          'PendingSoftReboot',
+          'Downloading',
+          'WaitingDeadline'
+        ])
       }
     }),
     patches: _.times(15, function (n) {
@@ -26,6 +32,15 @@ module.exports = function () {
         id: n + 1,
         deploymentid: _.random(1, 5),
         articleid: n + 200001
+      }
+    }),
+    checklisttodo: _.times(10, function (n) {
+      return {
+        id: n + 1,
+        todotitle: `Title${n + 1}`,
+        todosubtitle: `Subtitle${n + 1}`,
+        state: _.sample(['todo', 'inprogress', 'completed', 'onhold']),
+        badgeactive: _.sample([true, false])
       }
     })
   }

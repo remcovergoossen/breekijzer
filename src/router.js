@@ -1061,6 +1061,24 @@ const router = new Router({
             import('./views/forms/form-elements/datepicker/Datepicker.vue')
         },
         {
+          path: '/serviceweekend/checklist',
+          name: 'Checklist',
+          index: 55,
+          meta: {
+            breadcrumb: [
+              {
+                title: 'Checklist',
+                url: '/serviceweekend/checklist-dashboard'
+              },
+              {
+                title: 'Checklist',
+                active: true
+              }
+            ]
+          },
+          component: () => import('./views/serviceweekend/Checklist.vue')
+        },
+        {
           path: '/dashboards/general-dashboard',
           name: 'General Dashboard',
           index: 55,

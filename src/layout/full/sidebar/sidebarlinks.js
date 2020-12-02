@@ -30,21 +30,21 @@ export default [
       {
         url: '/dashboards/ecommerce-dashboard',
         name: 'Environments',
-        icon: 'mdi mdi mdi-adjust',
+        icon: 'mdi mdi-application',
         i18n: 'Environments',
         index: 1.4
       },
       {
         url: '/dashboards/general-dashboard',
         name: 'Updates',
-        icon: 'mdi mdi mdi-adjust',
+        icon: 'mdi mdi mdi-update',
         i18n: 'Updates',
         index: 1.5
       },
       {
-        url: '/dashboards/general-dashboard',
+        url: '/serviceweekend/checklist',
         name: 'Checklist',
-        icon: 'mdi mdi mdi-adjust',
+        icon: 'mdi mdi-format-list-numbers',
         i18n: 'Checklist',
         index: 1.6
       }
