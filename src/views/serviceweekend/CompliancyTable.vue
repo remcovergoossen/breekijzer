@@ -4,19 +4,23 @@
       v-model="selected"
       search
       multiple
-      :data="users"
+      :data="devices"
       @selected="handleSelected"
       @dblSelection="doubleSelection"
     >
       <template slot="header">
         <h3>Server Compliancy</h3>
+        <p class="card-subtitle">
+          Filter: <code>All / InProgress / Unknown / Error</code>
+        </p>
       </template>
+
       <template slot="thead">
         <vs-th sort-key="device"> Device </vs-th>
-        <vs-th> Deployment </vs-th>
+        <vs-th> Info </vs-th>
         <vs-th> SCCMState </vs-th>
         <vs-th> LocalState </vs-th>
-        <vs-th> ID </vs-th>
+        <vs-th> Action </vs-th>
       </template>
 
       <template slot-scope="{ data }">
@@ -25,20 +29,26 @@
             {{ data[indextr].device }}
           </vs-td>
 
-          <vs-td :data="data[indextr].deployment">
-            {{ data[indextr].deployment }}
+          <vs-td :data="data[indextr].name">
+            {{ data[indextr].name }}
           </vs-td>
 
-          <vs-td :data="data[indextr].sccm">
-            {{ data[indextr].sccm }}
+          <vs-td :data="data[indextr].sccmstate">
+            {{ data[indextr].sccmstate }}
           </vs-td>
-          <vs-td :data="data[indextr].local">
-            {{ data[indextr].local }}
+          <vs-td :data="data[indextr].localstate">
+            {{ data[indextr].localstate }}
           </vs-td>
 
-          <vs-td :data="data[indextr].id">
-            {{ data[indextr].id }}
-          </vs-td>
+          <!--<vs-td :data="data[indextr].id">
+            {{ data[indextr].id }}</vs-td>-->
+          <vs-td
+            ><vs-button
+              color="primary"
+              type="border"
+              icon="desktop_windows"
+            ></vs-button
+          ></vs-td>
         </vs-tr>
       </template>
     </vs-table>
@@ -51,30 +61,28 @@
 export default {
   data: () => ({
     selected: [],
-    users: [
-      {
-        id: 1,
-        device: 'S0MDWT0001G',
-        deployment: 'ServerPatching : 2012',
-        sccm: 'InProgress',
-        local: 'Installing'
-      },
-      {
-        id: 2,
-        device: 'S0MBEH0019G',
-        deployment: 'ServerPatching : 2012',
-        sccm: 'InProgress',
-        local: 'PendingSoftReboot'
-      },
-      {
-        id: 3,
-        device: 'S0MBEH0021G',
-        deployment: 'ServerPatching : 2012',
-        sccm: 'InProgress',
-        local: 'Downloading'
-      }
-    ]
+    devices: []
   }),
+  created() {
+    fetch('http://localhost:3000/devices')
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        for (let prop in data) {
+          this.devices.push({
+            id: data[prop].deploymentid,
+            device: data[prop].device,
+            sccmstate: data[prop].sccmstate,
+            deployment: data[prop].deployment,
+            localstate: data[prop].localstate,
+            error: data[prop].Error,
+            name: data[prop].Name
+          })
+        }
+      })
+    console.log(this.devices)
+  },
   methods: {
     handleSelected(tr) {
       this.$vs.notify({

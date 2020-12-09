@@ -1,3 +1,18 @@
-#Product sales graph
+Please use db.json and not generate for this assignment:
 
-More info to come.....
+npx json-server --watch db.json
+
+Set Compliancy chart should show percentage 0-100 for /deployments
+	-> need to attach api also
+Deployment compliancy should show success/inprogress/error and unknown
+	-> need to attach api also
+
+Chart parts should be clickable and show their respective info in table
+
+example:
+
+clicking serverpatchingpreSW : Donderdag in Set compliancy chart should show compliancytable info only on that ID
+clicking the Success or Inprogress bar in the deployment compliancy chart should show only that Deployment AND filter on Success / Inprogress
+
+Server compliancy table should have a filter list or all possible options from SCCMState / LocalState columns
+for example, if the columns have PendingSoftReboot and Unknown SCCMState status, it should show as Filter: All / PendingSoftReboot / Unknown

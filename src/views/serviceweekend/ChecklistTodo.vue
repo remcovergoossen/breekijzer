@@ -9,6 +9,17 @@
             color="primary"
             type="filled"
             class="mt-4 mt-md-0"
+            disabled
+          >
+            <i class="mdi mdi-settings mr-1"></i> Manage
+          </vs-button>
+        </div>
+        <div class="ml-auto">
+          <vs-button
+            @click="active = !active"
+            color="primary"
+            type="filled"
+            class="mt-4 mt-md-0"
           >
             <i class="mdi mdi-border-color mr-1"></i> Add Check
           </vs-button>
@@ -186,7 +197,7 @@
       >
         <div class="header-sidebar p-3 bg-light">
           <div class="d-flex align-items-center">
-            <h3 class="card-title mb-0">Add Your Task</h3>
+            <h3 class="card-title mb-1">Add Check</h3>
             <div class="ml-auto">
               <vs-button
                 color="primary"
@@ -202,18 +213,19 @@
             <vs-input
               icon-after="true"
               icon="mode_edit"
-              placeholder="Todo Title"
+              placeholder="Task Title"
               v-model="todotitle"
               class="w-100 mb-4"
             />
             <vs-input
               icon-after="true"
               icon="mode_edit"
-              placeholder="Todo Subtitle"
+              placeholder="Task Subtitle"
               v-model="todosubtitle"
               class="w-100 mb-4"
             />
-            <div class="d-flex">
+            <!--
+              <div class="d-flex">
               <vs-checkbox
                 v-model="todos.checked"
                 id="bookmk"
@@ -221,9 +233,10 @@
                 @click="showBookmark()"
                 :class="{ checked: isChk.includes('addbook') }"
                 for="addbook"
-                >Add to Bookmark</vs-checkbox
+                >Priority</vs-checkbox
               >
             </div>
+            -->
             <vs-button
               color="primary"
               type="filled"
@@ -261,35 +274,43 @@ export default {
     completetodo: [],
     onholdtodo: []
   }),
-  created(){
-    fetch('http://localhost:3000/checklisttodo/?' +
-              new URLSearchParams({
-                state: 'todo'
-              }))
+  created() {
+    fetch(
+      'http://localhost:3000/checklisttodo/?' +
+        new URLSearchParams({
+          state: 'todo'
+        })
+    )
       .then((response) => response.json())
       .then((data) => {
         this.todos = data
       })
-    fetch('http://localhost:3000/checklisttodo/?' +
-              new URLSearchParams({
-                state: 'inprogress'
-              }))
+    fetch(
+      'http://localhost:3000/checklisttodo/?' +
+        new URLSearchParams({
+          state: 'inprogress'
+        })
+    )
       .then((response) => response.json())
       .then((data) => {
         this.progresstodo = data
       })
-    fetch('http://localhost:3000/checklisttodo/?' +
-              new URLSearchParams({
-                state: 'onhold'
-              }))
+    fetch(
+      'http://localhost:3000/checklisttodo/?' +
+        new URLSearchParams({
+          state: 'onhold'
+        })
+    )
       .then((response) => response.json())
       .then((data) => {
         this.onholdtodo = data
       })
-    fetch('http://localhost:3000/checklisttodo/?' +
-              new URLSearchParams({
-                state: 'completed'
-              }))
+    fetch(
+      'http://localhost:3000/checklisttodo/?' +
+        new URLSearchParams({
+          state: 'completed'
+        })
+    )
       .then((response) => response.json())
       .then((data) => {
         this.completetodo = data
@@ -332,42 +353,51 @@ export default {
 
     async createCheckList(todo_bunch) {
       console.log('called createCheckList')
-      const requestOptions  = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(todo_bunch)
-      };
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(todo_bunch)
+      }
 
-      fetch("http://localhost:3000/checklisttodo", requestOptions)
-          .then(response => response.json())
-          .then(data => (console.log("created checklist", data)));
+      fetch('http://localhost:3000/checklisttodo', requestOptions)
+        .then((response) => response.json())
+        .then((data) => console.log('created checklist', data))
     },
-    async updateCheckList(todo_bunch, state){
+    async updateCheckList(todo_bunch, state) {
       const todo_data = {
-        todotitle:todo_bunch.todotitle,
-        state:state,
-        todosubtitle:todo_bunch.todosubtitle,
-        badgeactive:todo_bunch.badgeactive
-      };
-      const requestOptions  = {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(todo_data)
-      };
+        todotitle: todo_bunch.todotitle,
+        state: state,
+        todosubtitle: todo_bunch.todosubtitle,
+        badgeactive: todo_bunch.badgeactive
+      }
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(todo_data)
+      }
 
-      fetch("http://localhost:3000/checklisttodo/" + todo_bunch.id, requestOptions)
-          .then(response => response.json())
-          //.then(data => (
-            //console.log("updated checklist", data)
-          //  )
-          //);
+      fetch(
+        'http://localhost:3000/checklisttodo/' + todo_bunch.id,
+        requestOptions
+      ).then((response) => response.json())
+      //.then(data => (
+      //console.log("updated checklist", data)
+      //  )
+      //);
     },
 
-    dragstart(e, item){
-    },
-    dragend(e, item){
-      console.log(this.todos.length + ' ' + this.onholdtodo.length + '  ' + this.completetodo.length + ' ' + this.progresstodo.length)
-      
+    dragstart(e, item) {},
+    dragend(e, item) {
+      console.log(
+        this.todos.length +
+          ' ' +
+          this.onholdtodo.length +
+          '  ' +
+          this.completetodo.length +
+          ' ' +
+          this.progresstodo.length
+      )
+
       console.log('todos', this.todos)
       console.log('onholdtodo', this.onholdtodo)
       console.log('completetodo', this.completetodo)
