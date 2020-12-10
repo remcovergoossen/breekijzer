@@ -4,15 +4,24 @@
       v-model="selected"
       search
       multiple
-      :data="devices"
+      :data="filtered_devices"
       @selected="handleSelected"
       @dblSelection="doubleSelection"
     >
       <template slot="header">
-        <h3>Server Compliancy</h3>
-        <p class="card-subtitle">
-          Filter: <code>All / InProgress / Unknown / Error</code>
-        </p>
+        <vs-col vs-lg="4" vs-xs="12" class="mb-4">
+          <h3>Server Compliancy</h3>
+        </vs-col>
+        <vs-col vs-lg="8" vs-xs="12" class="mb-4">
+          <code v-on:click="filterTableByDropdown('All')" v-bind:style="{cursor: 'pointer'}">All&nbsp;/&nbsp;</code>
+          <code v-on:click="filterTableByDropdown('PendingSoftReboot')" v-bind:style="{cursor: 'pointer'}">PendingSoftReboot&nbsp;/&nbsp;</code>
+          <code v-on:click="filterTableByDropdown(item)" v-for="item in filter_list" v-bind:style="{cursor: 'pointer'}">
+            <span>{{item}}
+              <span v-if="item != filter_list[filter_list.length - 1]">&nbsp;/&nbsp;</span>
+            </span>
+          </code>
+        </vs-col>
+
       </template>
 
       <template slot="thead">
@@ -61,29 +70,82 @@
 export default {
   data: () => ({
     selected: [],
-    devices: []
+    devices: [],
+    filtered_devices: [],
+    deployments: [],
+    filter_list: [],
+    checkarray1:['Luis'],
+    selectedsccm: 0,
+    selectdlocal: 0,
+    sccmstates:[
+      {text:'All', value:0},
+      {text:'Unknown', value:1},
+      {text:'Inprogress', value:2}
+    ],
+    dataPointIndex: -1,
+    seriesIndex: -1
   }),
   created() {
-    fetch('http://localhost:3000/devices')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        for (let prop in data) {
-          this.devices.push({
-            id: data[prop].deploymentid,
-            device: data[prop].device,
-            sccmstate: data[prop].sccmstate,
-            deployment: data[prop].deployment,
-            localstate: data[prop].localstate,
-            error: data[prop].Error,
-            name: data[prop].Name
-          })
-        }
-      })
-    console.log(this.devices)
+    //All / InProgress / Unknown / Error
+
+    // fetch('http://localhost:3000/devices')
+    //   .then((response) => {
+    //     return response.json()
+    //   })
+    //   .then((data) => {
+    //     this.all_devices = data
+    //     this.updateTable(-1, -1)
+    //   })
+    // console.log('devices', this.devices)
+    // console.log('quites', this.$parent)
   },
   methods: {
+    filterTableByDropdown(filter_key){
+      console.log('filtering table', filter_key)
+      let filtered = [];
+      this.filtered_devices = [];
+
+      if(filter_key === 'All')
+      {
+        filtered = this.devices
+      }
+      else if(filter_key === 'PendingSoftReboot')
+      {
+        filtered = this.devices.filter(function(e){return e.localstate == filter_key})
+      }
+      else
+      {
+        filtered = this.devices.filter(function(e){return e.sccmstate == filter_key})
+      }
+      for(let i in filtered){
+        this.filtered_devices.push({
+          id: filtered[i].deploymentid,
+          device: filtered[i].device,
+          sccmstate: filtered[i].sccmstate,
+          deployment: filtered[i].deployment,
+          localstate: filtered[i].localstate,
+          error: filtered[i].Error,
+          name: filtered[i].Name
+        })
+      }
+    },
+    updateTable(deployments, devices){
+      console.log('updating data inside CompliancyTable')
+      this.deployments = deployments
+      this.devices = devices
+      this.filter_list = []
+
+      this.filterTableByChart()//show all data
+      this.updateStatesKeys()
+
+    },
+    updateStatesKeys(){
+      const devices = this.filtered_devices
+      const states  = [...new Set(devices.map(devices => devices.sccmstate))]
+      for(let i in states){
+        this.filter_list.push(states[i])
+      }
+    },
     handleSelected(tr) {
       this.$vs.notify({
         title: `Selected ${tr.username}`,
@@ -96,7 +158,61 @@ export default {
         text: `Email: ${tr.email}`,
         color: 'success'
       })
+    },
+    filterTableByChart()
+    {
+        this.filtered_devices = [];
+        console.log('filtering by ', this.dataPointIndex, this.seriesIndex)
+        for(let i in this.deployments){
+
+          //------------filter data-------------//
+          if(this.dataPointIndex >= 0 && i != this.dataPointIndex)continue;
+
+          for (let prop in this.devices) {
+            if(this.deployments[i].id == this.devices[prop].deploymentid){
+              let will_skip = false
+              if(this.seriesIndex >= 0){
+                will_skip = true;
+                switch(this.devices[prop].sccmstate){
+                  case "Success":
+                    if(this.seriesIndex == 0)will_skip = false;
+                    break;
+                  case "InProgress":
+                    if(this.seriesIndex == 1)will_skip = false;
+                    break;
+                  case "Error":
+                    if(this.seriesIndex == 2)will_skip = false;
+                    break;
+                  default:
+                    if(this.seriesIndex == 3)will_skip = false;
+                    break;
+                }
+              }
+              if(will_skip){continue;}
+              //-----------filtered data-----------//
+
+              this.filtered_devices.push({
+                id: this.devices[prop].deploymentid,
+                device: this.devices[prop].device,
+                sccmstate: this.devices[prop].sccmstate,
+                deployment: this.devices[prop].deployment,
+                localstate: this.devices[prop].localstate,
+                error: this.devices[prop].Error,
+                name: this.devices[prop].Name
+              })
+            }
+            
+          }
+        }
+
+    },
+    setChartFilterKey(dataPointIndex, seriesIndex){
+      this.dataPointIndex = dataPointIndex
+      this.seriesIndex = seriesIndex
+      console.log(this.dataPointIndex, this.seriesIndex)
+      this.filterTableByChart()
     }
+
   }
 }
 </script>

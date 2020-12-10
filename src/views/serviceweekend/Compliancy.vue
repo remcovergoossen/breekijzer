@@ -6,13 +6,13 @@
           <h3 class="card-title"></h3>
           <h5 class="card-subtitle font-weight-normal text-muted"></h5>
         </div>
-        <CompliancyChart></CompliancyChart>
+        <CompliancyChart @setCompliancyComponentDetails="setFilterkeyForComponent" @updateDataTable="updateChildDataTable"></CompliancyChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
         <div>
-          <CompliancyTable></CompliancyTable>
+          <CompliancyTable ref="componentTable"></CompliancyTable>
         </div>
       </vs-card>
     </vs-col>
@@ -31,6 +31,16 @@ export default {
   data() {
     return {
       quote: 'single'
+    }
+  },
+  methods: {
+    setFilterkeyForComponent(dataPointIndex, seriesIndex){
+      console.log('dataPointIndex', dataPointIndex)
+      console.log('seriesIndex', seriesIndex)
+      this.$refs.componentTable.setChartFilterKey(dataPointIndex, seriesIndex)
+    },
+    updateChildDataTable(deployments, devices){
+      this.$refs.componentTable.updateTable(deployments, devices)
     }
   }
 }

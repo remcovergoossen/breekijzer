@@ -7,6 +7,7 @@
       type="bar"
       :options="chartOptions"
       :series="series"
+      @dataPointSelection="dataPointSelectionHandler"
     ></apexcharts>
   </div>
 </template>
@@ -22,32 +23,31 @@ export default {
   },
   data: function () {
     return {
+      deployments:[],
       series: [
         {
           name: 'Success',
-          data: [44, 55, 57, 56]
+          data: []
         },
         {
           name: 'InProgress',
-          data: [76, 85, 155, 98]
+          data: []
         },
         {
           name: 'Error',
-          data: [35, 41, 36, 26]
+          data: []
         },
         {
           name: 'Unknown',
-          data: [1, 1, 2, 0]
+          data: []
         }
       ],
-
+      devices: [],
       chartOptions: {
         colors: ['#22bb33', '#5bc0de', '#bb2124', '#aaaaaa'],
         chart: {
           events: {
             dataPointSelection: function (event, chartContext, config) {
-              console.log(config.seriesIndex)
-              console.log(config.dataPointIndex)
             }
           },
           type: 'bar',
@@ -69,7 +69,7 @@ export default {
           colors: ['transparent']
         },
         xaxis: {
-          categories: ['ServerPatching : 2008R2', '2012', '2016', '2019']
+          categories: ['asdf', 'asdfaf', 'asdfafsd', 'asdfasf', 'asdfasfd']
         },
         yaxis: {
           title: {
@@ -89,8 +89,97 @@ export default {
       }
     }
   },
+  created(){
+    this.updateAxis()
+  },
   mounted() {
-    console.log(this.series)
+
+  },
+  methods: {
+    updateAxis(){
+      fetch(
+        'http://localhost:3000/deployments'
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          let categories = []
+          data.forEach(element => {
+            categories.push( element.name)
+          })
+          this.chartOptions = {
+            xaxis:{
+              categories:categories
+            }
+          }
+          this.deployments = data
+          this.updateSeries()
+        })
+    },
+    updateSeries(){
+      fetch('http://localhost:3000/devices')
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          this.devices = data
+          let success = []
+          let inprogress = []
+          let error = []
+          let unknown = []
+          for (let i in this.deployments){
+            let cnt_success = 0
+            let cnt_inprogress = 0
+            let cnt_error = 0
+            let cnt_unknown = 0
+            for (let prop in data) {
+              if(this.deployments[i].id == data[prop].deploymentid){
+                switch (data[prop].sccmstate) {
+                  case 'Success':
+                    cnt_success++
+                    break;
+                  case 'InProgress':
+                    cnt_inprogress++
+                    break;
+                  case 'Error':
+                    cnt_error++
+                    break;
+                  default:
+                    cnt_unknown++
+                    break;
+                }
+              }
+            }
+            success.push(cnt_success)
+            inprogress.push(cnt_inprogress)
+            error.push(cnt_error)
+            unknown.push(cnt_unknown)
+          }
+          this.series = [
+            {
+              name: 'Success',
+              data: success
+            },
+            {
+              name: 'InProgress',
+              data:inprogress
+            },
+            {
+              name: 'Error',
+              data: error
+            },
+            {
+              name: 'Unknown',
+              data: unknown
+            }
+          ]
+          this.$emit("updateDataTable", this.deployments, this.devices)
+
+        })
+
+    },
+    dataPointSelectionHandler(e, chartContext, config) {
+      this.$emit("setCompliancyComponentDetails", config.dataPointIndex, config.seriesIndex)
+    }
   }
 }
 </script>
