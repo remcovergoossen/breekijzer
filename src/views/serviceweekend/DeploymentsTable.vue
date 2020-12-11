@@ -192,6 +192,8 @@ export default {
                   //data for patches
                   this.deployments[this.cnt_loop2].patches = data.length
                   this.cnt_loop2++
+                  console.log('inside DeploymentsTable, deployments = ', this.deployments)
+                  this.$emit("setDeploymentDetails", this.deployments)
                 })
               this.cnt_loop1++
 
@@ -200,6 +202,7 @@ export default {
               // console.log(this.deployments)
             })
         }
+
       })
   }
 }

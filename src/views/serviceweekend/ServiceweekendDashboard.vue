@@ -37,7 +37,7 @@
         <div>
           <h3 class="card-title">Set Compliancy</h3>
         </div>
-        <DeploymentsChart></DeploymentsChart>
+        <DeploymentsChart ref="deploymentsChart"></DeploymentsChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="7" vs-xs="7" vs-sm="7">
@@ -45,17 +45,17 @@
         <div>
           <h3 class="card-title">Deployment Compliancy</h3>
         </div>
-        <CompliancyChart></CompliancyChart>
+        <CompliancyChart @setCompliancyComponentDetails="setFilterkeyForComponent" @updateDataTable="updateChildDataTable"></CompliancyChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
-        <DeploymentsTable></DeploymentsTable>
+        <DeploymentsTable  @setDeploymentDetails="setDeploymentDetails"></DeploymentsTable>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
-        <CompliancyTable></CompliancyTable>
+        <CompliancyTable ref="componentTable"></CompliancyTable>
       </vs-card>
     </vs-col>
   </vs-row>
@@ -140,6 +140,17 @@ export default {
     increment() {
       this.badge1++
       this.badge2++
+    },
+    setFilterkeyForComponent(dataPointIndex, seriesIndex){
+      console.log('dataPointIndex', dataPointIndex)
+      console.log('seriesIndex', seriesIndex)
+      this.$refs.componentTable.setChartFilterKey(dataPointIndex, seriesIndex)
+    },
+    updateChildDataTable(deployments, devices){
+      this.$refs.componentTable.updateTable(deployments, devices)
+    },
+    setDeploymentDetails(deployments){
+      this.$refs.deploymentsChart.updateChart(deployments)
     }
   }
 }

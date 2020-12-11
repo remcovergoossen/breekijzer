@@ -48,6 +48,25 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    updateChart(deployments) {
+      // this.series = [{data:[]}]
+      let categories = []
+
+      this.series[0].data = deployments.map(a => Math.floor(a.device_success / a.device_total * 100));
+
+      deployments.forEach(element => {
+        categories.push( element.name)
+      })
+
+      this.chartOptions = {
+        xaxis:{
+          categories:categories
+        }
+      }
+
+    }
   }
 }
 </script>
