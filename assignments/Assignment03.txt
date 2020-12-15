@@ -1,0 +1,11 @@
+Add /services and /pools endpoint from API to AppPoolsChecklist / ServicesChecklist
+Both endpoints have these columns:
+    "name": 
+    "state": 
+    "Device": 
+
+For all tables there is an action column with a computer icon, when the button is clicked the URL from /vmrc endpoint for that device should be opened.
+
+For example, in the application pools there is a device called S0ACAW0062O, when shown in the list, the button should open the vmrc link that can be found under the vmrc endpoint:
+
+http://localhost:3000/vmrc?device=S0ACAW0062O
