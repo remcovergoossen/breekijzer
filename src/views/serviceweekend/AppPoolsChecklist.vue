@@ -21,6 +21,7 @@
       </p>
       <vs-table search :data="apppoolschecklist">
         <template slot="thead">
+          <vs-th sort-key="name"> Name </vs-th>
           <vs-th sort-key="device"> Device </vs-th>
           <vs-th sort-key="status"> Status </vs-th>
           <!-- <vs-th sort-key="id"> Action </vs-th> -->
@@ -28,13 +29,15 @@
         </template>
         <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
+            <vs-td :data="data[indextr].name"> {{ tr.name }} </vs-td>
             <vs-td :data="data[indextr].device"> {{ tr.device }} </vs-td>
-            <vs-td :data="data[indextr].status"> {{ tr.status }} </vs-td>
+            <vs-td :data="data[indextr].state"> {{ tr.state }} </vs-td>
             <vs-td
               ><vs-button
                 color="primary"
                 type="border"
-                icon="search"
+                icon="laptop"
+                :href="{url: tr.url}"
               ></vs-button
             ></vs-td>
             <!--<vs-td :data="data[indextr].id"> data[indextr].id </vs-td>-->
@@ -50,18 +53,7 @@
 export default {
   name: 'basictable',
   data: () => ({
-    apppoolschecklist: [
-      {
-        id: 1,
-        device: 'device1',
-        status: 'OK'
-      },
-      {
-        id: 2,
-        device: 'device2',
-        status: 'Error'
-      }
-    ],
+    apppoolschecklist: [],
     devices: [],
 
     title: 'BasicTable',
@@ -70,6 +62,38 @@ export default {
 
     stripedtable: false,
     statetable: false
-  })
+  }),
+  created() {
+    fetch('http://localhost:3000/pools')
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.apppoolschecklist = []
+        for(let i in data){
+          this.apppoolschecklist.push({
+              name: data[i].name,
+              device: data[i].Device,
+              state: data[i].state,
+              url: ""
+          })
+        }
+        fetch('http://localhost:3000/vmrc')
+        .then((response) => response.json())
+        .then((data) => {
+          this.vmrcs = data
+          for(let i in this.apppoolschecklist){
+            for(let j in data)
+            {
+              if(data[j]['device'] == this.apppoolschecklist[i]['device']){
+                this.apppoolschecklist[i]['url'] = data[j]['url']
+                break
+              }
+            }
+          }
+        })
+
+      })
+  }
 }
 </script>

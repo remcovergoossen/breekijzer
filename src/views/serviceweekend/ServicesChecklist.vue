@@ -12,16 +12,24 @@
       </p>
       <vs-table search :data="serviceschecklist">
         <template slot="thead">
-          <vs-th sort-key="device"> Device </vs-th>
-          <vs-th sort-key="username"> Status </vs-th>
+          <vs-th sort-key="name"> Name </vs-th>
+          <vs-th sort-key="Device"> Device </vs-th>
+          <vs-th sort-key="state"> Status </vs-th>
           <!-- <vs-th sort-key="id"> Action </vs-th> -->
           <vs-th sort-key="action"> Action </vs-th>
         </template>
         <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="data[indextr].device"> tr.device </vs-td>
-            <vs-td :data="data[indextr].status"> tr.status </vs-td>
-            <vs-td>X Y O</vs-td>
+            <vs-td :data="data[indextr].name"> {{tr.name}} </vs-td>
+            <vs-td :data="data[indextr].device"> {{tr.device}} </vs-td>
+            <vs-td :data="data[indextr].state"> {{tr.state}} </vs-td>
+            <vs-td><vs-button
+                color="primary"
+                type="border"
+                icon="laptop"
+                :href="{url: tr.url}"
+                ></vs-button>
+              </vs-td>
             <!--<vs-td :data="data[indextr].id"> data[indextr].id </vs-td>-->
           </vs-tr>
         </template>
@@ -80,7 +88,8 @@ function getFullMonthName(numerical_month) {
 export default {
   name: 'basictable',
   data: () => ({
-    deployments: [],
+    serviceschecklist: [],
+    vmrcs: [],
     devices: [],
 
     title: 'BasicTable',
@@ -91,72 +100,36 @@ export default {
     statetable: false
   }),
   created() {
-    fetch('http://localhost:3000/deployments')
+    fetch('http://localhost:3000/services')
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        this.cnt_loop1 = 0
-        this.cnt_loop2 = 0
-        for (let prop in data) {
-          this.deployments.push({
-            id: data[prop].id,
-            name: data[prop].name,
-            starttime:
-              data[prop].starttime.substring(8, 10) +
-              ' ' +
-              getFullMonthName(data[prop].starttime.substring(5, 7)) +
-              ' ' +
-              data[prop].starttime.substring(0, 4) +
-              ' ' +
-              data[prop].starttime.substring(11, 19),
-            deadline:
-              data[prop].deadline.substring(8, 10) +
-              ' ' +
-              getFullMonthName(data[prop].deadline.substring(5, 7)) +
-              ' ' +
-              data[prop].deadline.substring(0, 4) +
-              ' ' +
-              data[prop].deadline.substring(11, 19),
-            device_total: 0,
-            device_success: 0,
-            patches: 0,
-            compliancy: 0
+        this.serviceschecklist = []
+        for(let i in data){
+          this.serviceschecklist.push( {
+              name: data[i].Name,
+              device: data[i].Device,
+              state: data[i].State,
+              url: ""
           })
-          fetch(
-            'http://localhost:3000/devices/?' +
-              new URLSearchParams({
-                deploymentid: data[prop].id
-              })
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              //data for devices
-              this.deployments[this.cnt_loop1].device_total = data.length
-              var device_success = 0
-              for (let prop in data) {
-                if (data[prop].sccmstate == 'Success')
-                  this.deployments[this.cnt_loop1].device_success++
-              }
-              this.deployments[this.cnt_loop1].compliancy = Math.floor(
-                (this.deployments[this.cnt_loop1].device_success * 100) /
-                  this.deployments[this.cnt_loop1].device_total
-              )
-              fetch(
-                'http://localhost:3000/patches/?' +
-                  new URLSearchParams({
-                    deploymentid: this.deployments[this.cnt_loop1].id
-                  })
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  //data for patches
-                  this.deployments[this.cnt_loop2].patches = data.length
-                  this.cnt_loop2++
-                })
-              this.cnt_loop1++
-            })
         }
+        
+        fetch('http://localhost:3000/vmrc')
+        .then((response) => response.json())
+        .then((data) => {
+          this.vmrcs = data
+          for(let i in this.serviceschecklist){
+            for(let j in data)
+            {
+              if(data[j]['device'] == this.serviceschecklist[i]['device']){
+                this.serviceschecklist[i]['url'] = data[j]['url']
+                break
+              }
+            }
+          }
+        })
+
       })
   }
 }
