@@ -146,8 +146,9 @@ export default {
       console.log('seriesIndex', seriesIndex)
       this.$refs.componentTable.setChartFilterKey(dataPointIndex, seriesIndex)
     },
-    updateChildDataTable(deployments, devices){
-      this.$refs.componentTable.updateTable(deployments, devices)
+    updateChildDataTable(deployments, devices, vmrcs){
+      console.log('vmrcs', vmrcs)
+      this.$refs.componentTable.updateTable(deployments, devices, vmrcs)
     },
     setDeploymentDetails(deployments){
       this.$refs.deploymentsChart.updateChart(deployments)
