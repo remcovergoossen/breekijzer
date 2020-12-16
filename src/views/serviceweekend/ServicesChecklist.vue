@@ -89,7 +89,6 @@ export default {
   name: 'basictable',
   data: () => ({
     serviceschecklist: [],
-    vmrcs: [],
     devices: [],
 
     title: 'BasicTable',
@@ -118,7 +117,6 @@ export default {
         fetch('http://localhost:3000/vmrc')
         .then((response) => response.json())
         .then((data) => {
-          this.vmrcs = data
           for(let i in this.serviceschecklist){
             for(let j in data)
             {

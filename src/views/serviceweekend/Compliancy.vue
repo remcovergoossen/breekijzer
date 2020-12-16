@@ -35,12 +35,11 @@ export default {
   },
   methods: {
     setFilterkeyForComponent(dataPointIndex, seriesIndex){
-      console.log('dataPointIndex', dataPointIndex)
-      console.log('seriesIndex', seriesIndex)
       this.$refs.componentTable.setChartFilterKey(dataPointIndex, seriesIndex)
     },
-    updateChildDataTable(deployments, devices){
-      this.$refs.componentTable.updateTable(deployments, devices)
+    updateChildDataTable(deployments, devices, vmrcs){
+
+      this.$refs.componentTable.updateTable(deployments, devices, vmrcs)
     }
   }
 }

@@ -70,6 +70,7 @@
               color="primary"
               type="border"
               icon="desktop_windows"
+              :href="{url: tr.url}"
             ></vs-button
           ></vs-td>
         </vs-tr>
@@ -97,7 +98,8 @@ export default {
       { text: 'Inprogress', value: 2 }
     ],
     dataPointIndex: -1,
-    seriesIndex: -1
+    seriesIndex: -1,
+    vmrcs: []
   }),
   created() {
     //All / InProgress / Unknown / Error
@@ -129,24 +131,32 @@ export default {
           return e.sccmstate == filter_key
         })
       }
+      console.log(filtered)
       for (let i in filtered) {
-        this.filtered_devices.push({
-          id: filtered[i].deploymentid,
-          device: filtered[i].device,
-          sccmstate: filtered[i].sccmstate,
-          deployment: filtered[i].deployment,
-          localstate: filtered[i].localstate,
-          error: filtered[i].Error,
-          name: filtered[i].Name
-        })
+        for(let k in this.vmrcs){
+          if(filtered[i].device == this.vmrcs[k].device){
+            this.filtered_devices.push({
+              id: filtered[i].deploymentid,
+              device: filtered[i].device,
+              sccmstate: filtered[i].sccmstate,
+              deployment: filtered[i].deployment,
+              localstate: filtered[i].localstate,
+              error: filtered[i].Error,
+              name: filtered[i].Name,
+              url: this.vmrcs[k].url
+            })
+            break
+          }
+        }
+
       }
     },
-    updateTable(deployments, devices) {
+    updateTable(deployments, devices, vmrcs) {
       console.log('updating data inside CompliancyTable')
       this.deployments = deployments
       this.devices = devices
       this.filter_list = []
-
+      this.vmrcs = vmrcs
       this.filterTableByChart() //show all data
       this.updateStatesKeys()
     },
@@ -170,8 +180,9 @@ export default {
         color: 'success'
       })
     },
-    filterTableByChart() {
+    filterTableByChart() {//lowest child
       this.filtered_devices = []
+
       console.log('filtering by ', this.dataPointIndex, this.seriesIndex)
       for (let i in this.deployments) {
         //------------filter data-------------//
@@ -201,16 +212,23 @@ export default {
               continue
             }
             //-----------filtered data-----------//
+            for(let k in this.vmrcs){
 
-            this.filtered_devices.push({
-              id: this.devices[prop].deploymentid,
-              device: this.devices[prop].device,
-              sccmstate: this.devices[prop].sccmstate,
-              deployment: this.devices[prop].deployment,
-              localstate: this.devices[prop].localstate,
-              error: this.devices[prop].Error,
-              name: this.devices[prop].Name
-            })
+              if(this.devices[prop].device == this.vmrcs[k].device){
+                this.filtered_devices.push({
+                  id: this.devices[prop].deploymentid,
+                  device: this.devices[prop].device,
+                  sccmstate: this.devices[prop].sccmstate,
+                  deployment: this.devices[prop].deployment,
+                  localstate: this.devices[prop].localstate,
+                  error: this.devices[prop].Error,
+                  name: this.devices[prop].Name,
+                  url: this.vmrcs[k].url
+                })
+                break
+              }
+            }
+
           }
         }
       }

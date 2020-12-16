@@ -86,11 +86,19 @@ export default {
             }
           }
         }
-      }
+      },
+      vmrcs: []
     }
   },
   created(){
+        fetch('http://localhost:3000/vmrc')
+        .then((response) => response.json())
+        .then((data) => {
+          this.vmrcs = data
+        })
+
     this.updateAxis()
+
   },
   mounted() {
 
@@ -172,7 +180,7 @@ export default {
               data: unknown
             }
           ]
-          this.$emit("updateDataTable", this.deployments, this.devices)
+          this.$emit("updateDataTable", this.deployments, this.devices, this.vmrcs)
 
         })
 
