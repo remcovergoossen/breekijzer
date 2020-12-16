@@ -22,10 +22,10 @@
     <AppPoolsChecklist></AppPoolsChecklist>
     <ServicesChecklist></ServicesChecklist>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
-      <vs-card class="card-no-shadow"> Table? </vs-card>
+      <vs-card class="card-no-shadow">WebsitesInternal</vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
-      <vs-card class="card-no-shadow"> Table? </vs-card>
+      <vs-card class="card-no-shadow">WebsitesExternal</vs-card>
     </vs-col>
   </vs-row>
 </template>

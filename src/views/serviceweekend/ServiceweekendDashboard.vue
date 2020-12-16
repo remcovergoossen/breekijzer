@@ -1,37 +1,5 @@
 <template>
   <vs-row vs-justify="left">
-    <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
-      <vs-card>
-        <vs-list>
-          <vs-list-header icon="" title="Notifications"></vs-list-header>
-          <vs-list-item
-            icon="check"
-            title="Snickerdoodle"
-            subtitle="An excellent companion"
-          ></vs-list-item>
-          <vs-list-item
-            icon="check"
-            title="Sapporo Haru"
-            subtitle="An excellent polish restaurant, quick delivery and hearty, filling meals"
-          ></vs-list-item>
-          <vs-list-header
-            icon="how_to_reg"
-            title="Group 2"
-            color="success"
-          ></vs-list-header>
-          <vs-list-item
-            icon="verified_user"
-            title="Enid's"
-            subtitle="At night a bar, during the day a delicious brunch spot."
-          ></vs-list-item>
-          <vs-list-item
-            icon="verified_user"
-            title="Veronika Ossi"
-            subtitle="Has not watched anything recently"
-          ></vs-list-item>
-        </vs-list>
-      </vs-card>
-    </vs-col>
     <vs-col vs-lg="5" vs-xs="5" vs-sm="5">
       <vs-card class="card-no-shadow">
         <div>
@@ -45,12 +13,17 @@
         <div>
           <h3 class="card-title">Deployment Compliancy</h3>
         </div>
-        <CompliancyChart @setCompliancyComponentDetails="setFilterkeyForComponent" @updateDataTable="updateChildDataTable"></CompliancyChart>
+        <CompliancyChart
+          @setCompliancyComponentDetails="setFilterkeyForComponent"
+          @updateDataTable="updateChildDataTable"
+        ></CompliancyChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
-        <DeploymentsTable  @setDeploymentDetails="setDeploymentDetails"></DeploymentsTable>
+        <DeploymentsTable
+          @setDeploymentDetails="setDeploymentDetails"
+        ></DeploymentsTable>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
@@ -141,7 +114,7 @@ export default {
       this.badge1++
       this.badge2++
     },
-    setFilterkeyForComponent(dataPointIndex, seriesIndex){
+    setFilterkeyForComponent(dataPointIndex, seriesIndex) {
       console.log('dataPointIndex', dataPointIndex)
       console.log('seriesIndex', seriesIndex)
       this.$refs.componentTable.setChartFilterKey(dataPointIndex, seriesIndex)
@@ -150,7 +123,7 @@ export default {
       console.log('vmrcs', vmrcs)
       this.$refs.componentTable.updateTable(deployments, devices, vmrcs)
     },
-    setDeploymentDetails(deployments){
+    setDeploymentDetails(deployments) {
       this.$refs.deploymentsChart.updateChart(deployments)
     }
   }
