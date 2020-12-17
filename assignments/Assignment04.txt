@@ -7,3 +7,6 @@ added websitesinternal / external endpoint, should be displayed as list under ch
 server (device) | url | statuscode | action (vmrc link)
 
 Added /environments endpoint, there is a menu option called 'Environments', it should show a list of these when clicked (dropdown menu).
+
+
+

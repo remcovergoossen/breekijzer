@@ -7,26 +7,16 @@
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
-      <vs-card class="card-no-shadow">
-        <div>
-          <vs-tooltip
-            text="Manual devices should be checked by hand, these cannot be processed for any reason (winrm issue / etc)."
-            position="left"
-          >
-            <h3 class="card-title">Manual Devices</h3>
-          </vs-tooltip>
-        </div>
-        Q
-      </vs-card>
+      <vs-card class="card-no-shadow">ManualTable</vs-card>
     </vs-col>
-    <AppPoolsChecklist></AppPoolsChecklist>
-    <ServicesChecklist></ServicesChecklist>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">WebsitesInternal</vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">WebsitesExternal</vs-card>
     </vs-col>
+    <AppPoolsChecklist></AppPoolsChecklist>
+    <ServicesChecklist></ServicesChecklist>
   </vs-row>
 </template>
 <script>

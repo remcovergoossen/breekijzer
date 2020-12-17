@@ -14,13 +14,6 @@ export default [
         index: 1.1
       },
       {
-        url: '/dashboards/classic-dashboard',
-        name: 'Deployments',
-        icon: 'mdi mdi mdi-adjust',
-        i18n: 'Deployments',
-        index: 1.2
-      },
-      {
         url: '/serviceweekend/compliancy',
         name: 'Compliancy',
         icon: 'mdi mdi mdi-adjust',

@@ -6,13 +6,13 @@
           <h3 class="card-title"></h3>
           <h5 class="card-subtitle font-weight-normal text-muted"></h5>
         </div>
-        <CompliancyChart></CompliancyChart>
+        <DeploymentsChart ref="deploymentsChart"></DeploymentsChart>
       </vs-card>
     </vs-col>
     <vs-col vs-lg="12" vs-xs="12" vs-sm="12">
       <vs-card class="card-no-shadow">
         <div>
-          <CompliancyTable></CompliancyTable>
+          <DeploymentsTable></DeploymentsTable>
         </div>
       </vs-card>
     </vs-col>
@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import CompliancyChart from '../serviceweekend/CompliancyChart'
-import CompliancyTable from '../serviceweekend/CompliancyTable'
+import DeploymentsChart from '../serviceweekend/DeploymentsChart'
+import DeploymentsTable from '../serviceweekend/DeploymentsTable'
 
 export default {
   components: {
-    CompliancyChart,
-    CompliancyTable
+    DeploymentsChart,
+    DeploymentsTable
   },
   data() {
     return {

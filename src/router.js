@@ -966,23 +966,22 @@ const router = new Router({
             import('./views/serviceweekend/ServiceweekendDashboard.vue')
         },
         {
-          path: '/dashboards/classic-dashboard',
-          name: 'Classic Dashboard',
+          path: '/serviceweekend/deployments',
+          name: 'deployments',
           index: 50,
           meta: {
             breadcrumb: [
               {
-                title: 'Dashboards',
-                url: '/dashboards/classic-dashboard'
+                title: 'Deployments',
+                url: '/serviceweekend/deployments'
               },
               {
-                title: 'Classic Dashboard',
+                title: 'Deployments',
                 active: true
               }
             ]
           },
-          component: () =>
-            import('./views/dashboards/classic-dashboard/ClassicDashboard.vue')
+          component: () => import('./views/serviceweekend/Deployments.vue')
         },
         {
           path: '/serviceweekend/compliancy',
